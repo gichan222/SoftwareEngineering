@@ -57,12 +57,16 @@ public class SIM {
             int newY = y + dir[1];
 
             if (newX >= 0 && newX < map.length && newY >= 0 && newY < map[0].length && map[newX][newY].equals("2")) {
-                sb.append("colorBlob: " + newX + "," + newY + " O ");
-            } else {
-                sb.append("colorBlob: " + newX + "," + newY + " X ");
+                sb.append(newX).append(",").append(newY).append(", ");
             }
         }
-        return sb.toString();
+
+        if (sb.length() > 0) { // 색상 블롭을 찾았으면 마지막의 쉼표와 공백 제거
+            sb.setLength(sb.length() - 2);
+        }
+
+
+            return sb.toString();
     }
 
 

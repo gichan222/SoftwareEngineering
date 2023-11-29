@@ -36,9 +36,6 @@ public class MapRepo {
         return objectSpot;
     }
 
-    public List<String> getHazardSpot() {
-        return hazardSpot;
-    }
 
     public int getN() {
         return n;
