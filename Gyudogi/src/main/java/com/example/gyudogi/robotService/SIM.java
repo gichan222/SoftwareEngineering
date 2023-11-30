@@ -2,7 +2,7 @@ package com.example.gyudogi.robotService;
 
 import java.util.Random;
 
-public class SIM {
+public class SIM { // 로봇의 동작에 대한 기본을 담당하는 함수
     private String[][] map;
     private int x;
     private int y;
@@ -35,7 +35,7 @@ public class SIM {
         return direction;
     }
 
-    public void turn() {
+    public void turn() { // 로봇을 회전 시키는 함수
         if (direction.equals("N")) {
             direction = "E";
         } else if (direction.equals("E")) {
@@ -48,7 +48,7 @@ public class SIM {
     }
 
 
-    public String colorBlobSensor() {
+    public String colorBlobSensor() { // 컬러블럽을 탐색하는 센서
         StringBuilder sb = new StringBuilder();
         int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // 북, 남, 서, 동
 
@@ -70,7 +70,7 @@ public class SIM {
     }
 
 
-    public String hazardSensor() {
+    public String hazardSensor() { // 해저드를 탐색하는 함수
         int newX = x;
         int newY = y;
 
@@ -93,7 +93,7 @@ public class SIM {
 
 
 
-    public int move() {
+    public int move() { // 로봇을 움직이는 함수(5%확률로 0칸이동, 5% 확률로 2칸 이동->리턴값을 전부 다르게 해서 경로 재탐색 가능)
         Random random = new Random();
         int chance = random.nextInt(100);
         int tempX = getX();

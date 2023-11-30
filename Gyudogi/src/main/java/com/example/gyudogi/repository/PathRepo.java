@@ -3,7 +3,7 @@ package com.example.gyudogi.repository;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PathRepo{
+public class PathRepo{ // 경로에 대한 정보를 저장하는 클래스
     private List<String> path;
     private List<String> pathInfo;
     private List<List<String>> finalInfo;

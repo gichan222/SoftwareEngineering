@@ -18,10 +18,10 @@ import java.util.Map;
 
 @Configuration
 @RestController
-public class RobotController {
+public class RobotController { // 프론트와의 통신을 담당하는 클래스
 
     @Bean
-    public WebMvcConfigurer corsConfigurer() {
+    public WebMvcConfigurer corsConfigurer() { // API 보안 설정 해제해주는 함수
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
@@ -34,7 +34,7 @@ public class RobotController {
 
 
 
-    @PostMapping("/robot/move")
+    @PostMapping("/robot/move") //  robot/move라는 주소로 접근이 올 시에 경로를 반환시켜주는 함수
     public ResponseEntity<Map<String, List<List<String>>>> moveRobot(@RequestBody Map<String, Object> request) {
         // 요청 데이터 파싱
         int n = (int) request.get("n");
@@ -46,6 +46,8 @@ public class RobotController {
         List<String> endSpot = (List<String>) request.get("endSpot");
 
         // MapRepo 초기화
+        n += 1;
+        m += 1;
         String[][] mapData = new String[n][m];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {

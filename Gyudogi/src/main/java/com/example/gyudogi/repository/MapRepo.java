@@ -2,7 +2,7 @@ package com.example.gyudogi.repository;
 
 import java.util.List;
 
-public class MapRepo {
+public class MapRepo { // 지도에 관한 정보를 저장하는 클래스
     private String[][] mapData;
     private List<String> objectSpot;
     private List<String> hazardSpot;
@@ -18,6 +18,14 @@ public class MapRepo {
         this.hazardSpot = hazardSpot;
         this.n = mapData.length;
         this.m = mapData[0].length;
+    }
+
+    public int getN() {
+        return n;
+    }
+
+    public int getM() {
+        return m;
     }
 
     public String[][] getMapData() {
@@ -36,12 +44,4 @@ public class MapRepo {
         return objectSpot;
     }
 
-
-    public int getN() {
-        return n;
-    }
-
-    public int getM() {
-        return m;
-    }
 }

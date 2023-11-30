@@ -5,7 +5,7 @@ import com.example.gyudogi.repository.PathRepo;
 
 import java.util.*;
 
-public class PathFinder {
+public class PathFinder { // 경로 탐색에 대한 클래스
     private MapRepo mapRepo;
     private PathRepo pathRepo;
     private int[][] distance;
@@ -20,12 +20,24 @@ public class PathFinder {
         this.prev = new int[mapRepo.getN()][mapRepo.getM()][2];
     }
 
-    public void findPath(int startX, int startY, List<String> targets, List<String> pathResult) {
+    private List<String> getPath(int startX, int startY, int targetX, int targetY) { // 저장된 경로를 가져오는 함수
+        LinkedList<String> path = new LinkedList<>();
+        while (targetX != startX || targetY != startY) {
+            path.addFirst(targetX + ", " + targetY);
+            int[] p = prev[targetX][targetY];
+            targetX = p[0];
+            targetY = p[1];
+        }
+        path.addFirst(startX + ", " + startY);
+        return path;
+    }
+
+    public void findPath(int startX, int startY, List<String> targets, List<String> pathResult) { // 경로를 탐색하는 함수
         for (String target : targets) {
             String[] splitTarget = target.split(", ");
             int targetX = Integer.parseInt(splitTarget[0]);
             int targetY = Integer.parseInt(splitTarget[1]);
-            dijkstra(startX, startY, targetX, targetY);
+            dijkstra(startX, startY);
             List<String> path = getPath(startX, startY, targetX, targetY);
             pathResult.addAll(path);
             startX = targetX;
@@ -35,7 +47,7 @@ public class PathFinder {
     }
 
 
-    private void dijkstra(int startX, int startY, int targetX, int targetY) {
+    private void dijkstra(int startX, int startY) { // 다익스트라 알고리즘을 통해서 최단거리 탐색 진행
         for (int[] row : distance) {
             Arrays.fill(row, INF);
         }
@@ -67,15 +79,4 @@ public class PathFinder {
         }
     }
 
-    private List<String> getPath(int startX, int startY, int targetX, int targetY) {
-        LinkedList<String> path = new LinkedList<>();
-        while (targetX != startX || targetY != startY) {
-            path.addFirst(targetX + ", " + targetY);
-            int[] p = prev[targetX][targetY];
-            targetX = p[0];
-            targetY = p[1];
-        }
-        path.addFirst(startX + ", " + startY);
-        return path;
-    }
 }
