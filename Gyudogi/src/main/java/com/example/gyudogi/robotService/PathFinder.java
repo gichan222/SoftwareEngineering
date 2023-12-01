@@ -32,7 +32,28 @@ public class PathFinder { // 경로 탐색에 대한 클래스
         return path;
     }
 
-    public void findPath(int startX, int startY, List<String> targets, List<String> pathResult) { // 경로를 탐색하는 함수
+    public void findPath(int startX, int startY, List<String> targets, List<String> pathResult) {
+
+        // 출발지점으로부터의 거리를 기준으로 목적지 정렬
+        final int finalStartX = startX; // 람다식 때문에 출발지의 x좌표 복사
+        final int finalStartY = startY; // 람다식 때문에 출발지의 y좌표 복사
+
+        targets.sort((target1, target2) -> {
+            String[] splitTarget1 = target1.split(", ");
+            int target1X = Integer.parseInt(splitTarget1[0]);
+            int target1Y = Integer.parseInt(splitTarget1[1]);
+
+            String[] splitTarget2 = target2.split(", ");
+            int target2X = Integer.parseInt(splitTarget2[0]);
+            int target2Y = Integer.parseInt(splitTarget2[1]);
+
+            double distance1 = Math.sqrt(Math.pow(target1X - finalStartX, 2) + Math.pow(target1Y - finalStartY, 2));
+            double distance2 = Math.sqrt(Math.pow(target2X - finalStartX, 2) + Math.pow(target2Y - finalStartY, 2));
+
+            return Double.compare(distance1, distance2);
+        });
+
+
         for (String target : targets) {
             String[] splitTarget = target.split(", ");
             int targetX = Integer.parseInt(splitTarget[0]);
@@ -45,6 +66,7 @@ public class PathFinder { // 경로 탐색에 대한 클래스
         }
         pathRepo.setPathInfo(pathResult);
     }
+
 
 
     private void dijkstra(int startX, int startY) { // 다익스트라 알고리즘을 통해서 최단거리 탐색 진행
